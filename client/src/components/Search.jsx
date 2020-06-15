@@ -36,8 +36,6 @@ class Search extends React.Component {
         <br />
         <br />
 
-        {/* How can you tell which option has been selected from here? */}
-
         <select onChange={this.props.setGenre}>
           <option value="">Select Genre</option>
           {this.state.genres.map((genre) => (
