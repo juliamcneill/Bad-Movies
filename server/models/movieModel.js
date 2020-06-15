@@ -1,10 +1,30 @@
-//Select one db to work with:
+const sqlDb = require("../../db");
 
-//For SQL
-const sqlDb = require('../../db/sql');
-//For Mongo
-const mongoDb = require('../../db/mongodb')
+module.exports.saveFavorite = (
+  { id, title, overview, release_date, popularity, vote_average, poster_path },
+  callback
+) => {
+  console.log("made it");
+  const query = `INSERT INTO favoritemovies SET ?`;
+  const properties = {
+    id,
+    title,
+    overview,
+    release_date,
+    popularity,
+    vote_average,
+    poster_path,
+  };
+  sqlDb.query(query, properties, callback);
+};
 
-module.exports = {
+module.exports.deleteFavorite = (id, callback) => {
+  console.log("id is", id);
+  const query = `DELETE FROM favoritemovies WHERE \`id\` = ?`;
+  sqlDb.query(query, [id], callback);
+};
 
-}
+module.exports.getFavorites = (callback) => {
+  const query = "SELECT * FROM favoritemovies";
+  sqlDb.query(query, callback);
+};
